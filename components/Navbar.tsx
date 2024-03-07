@@ -9,8 +9,8 @@ import icon_preview from '../public/assets/icon-preview-header.svg';
 
 export default function Navbar() {
   return (
-    <nav className='w-full py-4 pl-6 pr-4 rounded-xl shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:p-6'>
-      <ul className='flex flex-row justify-between items-center md:py-4 md:pl-6 md:pr-4'>
+    <nav className='w-full py-4 pl-6 pr-4 max-sm:rounded-xl max-sm:shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:p-6 md:bg-very-light-gray'>
+      <ul className='flex flex-row justify-between items-center md:py-4 md:pl-6 md:pr-4 md:rounded-xl bg-white'>
         <Link href='/'>
           <Image src={logo} alt='logo' className='md:hidden' />
           <Image src={large_logo} alt='logo' className='max-sm:hidden w-[146px]' />
