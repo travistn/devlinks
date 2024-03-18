@@ -1,6 +1,8 @@
+import Image from 'next/image';
 import { Listbox } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
-import { LuGithub } from 'react-icons/lu';
+
+import data from '../data.json';
 
 export default function PlatformSelect() {
   return (
@@ -8,8 +10,8 @@ export default function PlatformSelect() {
       <Listbox>
         <Listbox.Button className='w-full flex flex-row items-center'>
           <div className='flex flex-row items-center gap-3'>
-            <LuGithub className='fill-gray stroke-gray' />
-            <span className='text-dark-gray'>GitHub</span>
+            <Image src={data[0].image} alt='github-icon' width={16} height={16} />
+            <span className='text-dark-gray'>{data[0].name}</span>
           </div>
           <ChevronDownIcon className='w-[18px] ml-auto fill-violet stroke-violet stroke-[1.5px]' />
         </Listbox.Button>
