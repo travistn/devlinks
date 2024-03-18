@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import drag_and_drop_icon from '../public/assets/icon-drag-and-drop.svg';
+import PlatformSelect from './PlatformSelect';
 
 export default function LinkCard() {
   return (
@@ -12,6 +13,26 @@ export default function LinkCard() {
         </div>
         <p className='text-gray'>Remove</p>
       </div>
+      <div className='flex flex-col gap-1'>
+        <h4 className='text-[12px] text-dark-gray'>Platform</h4>
+        <PlatformSelect />
+      </div>
     </div>
   );
+}
+
+{
+  /* <Listbox.Options>
+<div className='flex flex-row items-center gap-3'>
+  {data.map((social) => (
+    <Image
+      src={social.image}
+      alt={`${social.name}-icon`}
+      key={social.name}
+      width={16}
+      height={16}
+    />
+  ))}
+</div>
+</Listbox.Options> */
 }
