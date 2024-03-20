@@ -4,10 +4,18 @@ import { Listbox } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 
 import data from '../data.json';
+import { PlatformProps } from '@/types';
 
-export default function PlatformSelect() {
+type PlatformSelectProps = {
+  selectedPlatform: PlatformProps;
+  setSelectedPlatform: (platform: PlatformProps) => void;
+};
+
+export default function PlatformSelect({
+  selectedPlatform,
+  setSelectedPlatform,
+}: PlatformSelectProps) {
   const [selectIsOpen, setSelectIsOpen] = useState(false);
-  const [selectedPlatform, setSelectedPlatform] = useState(data[0]);
 
   return (
     <Listbox value={selectedPlatform} onChange={setSelectedPlatform}>
@@ -31,24 +39,24 @@ export default function PlatformSelect() {
         </Listbox.Button>
         <Listbox.Options className='absolute mt-4 bg-white rounded-lg border border-light-gray py-2 px-4 w-full shadow-[0_4px_32px_0_rgba(0,0,0,0.1)] flex flex-col select-none'>
           {data
-            .filter((social) => social !== selectedPlatform)
-            .map((social) => (
+            .filter((platform) => platform !== selectedPlatform)
+            .map((platform) => (
               <Listbox.Option
-                key={social.name}
-                value={social}
+                key={platform.name}
+                value={platform}
                 className={({ active }) =>
                   `flex flex-row items-center gap-3 border-b border-light-gray py-3 lg:px-2 ${
                     active ? 'bg-violet/25 cursor-pointer' : ''
                   }`
                 }>
                 <Image
-                  src={social.image}
-                  alt={`${social.name}-icon`}
-                  key={social.name}
+                  src={platform.image}
+                  alt={`${platform.name}-icon`}
+                  key={platform.name}
                   width={16}
                   height={16}
                 />
-                <span className='text-dark-gray'>{social.name}</span>
+                <span className='text-dark-gray'>{platform.name}</span>
               </Listbox.Option>
             ))}
         </Listbox.Options>
