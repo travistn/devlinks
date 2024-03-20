@@ -30,21 +30,23 @@ export default function PlatformSelect() {
           )}
         </Listbox.Button>
         <Listbox.Options className='absolute mt-4 bg-white rounded-lg border border-light-gray py-3 px-4 w-full shadow-[0_4px_32px_0_rgba(0,0,0,0.1)] flex flex-col gap-3'>
-          {data.map((social) => (
-            <Listbox.Option
-              key={social.name}
-              value={social}
-              className='flex flex-row items-center gap-3 border-b border-light-gray pb-3 lg:hover:cursor-pointer'>
-              <Image
-                src={social.image}
-                alt={`${social.name}-icon`}
+          {data
+            .filter((social) => social !== selectedPlatform)
+            .map((social) => (
+              <Listbox.Option
                 key={social.name}
-                width={16}
-                height={16}
-              />
-              <span className='text-dark-gray lg:hover:text-violet'>{social.name}</span>
-            </Listbox.Option>
-          ))}
+                value={social}
+                className='flex flex-row items-center gap-3 border-b border-light-gray pb-3 lg:hover:cursor-pointer'>
+                <Image
+                  src={social.image}
+                  alt={`${social.name}-icon`}
+                  key={social.name}
+                  width={16}
+                  height={16}
+                />
+                <span className='text-dark-gray lg:hover:text-violet'>{social.name}</span>
+              </Listbox.Option>
+            ))}
         </Listbox.Options>
       </div>
     </Listbox>
