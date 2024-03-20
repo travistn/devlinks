@@ -12,7 +12,7 @@ export default function PlatformSelect() {
   return (
     <Listbox value={selectedPlatform} onChange={setSelectedPlatform}>
       <div className='relative'>
-        <Listbox.Button className='w-full flex flex-row items-center bg-white border border-light-gray rounded-lg py-3 px-4 hover:shadow-[0_0px_32px_0_rgba(99,60,255,0.25)] hover:border hover:border-violet'>
+        <Listbox.Button className='w-full flex flex-row items-center bg-white border border-light-gray rounded-lg py-3 px-4 select-none hover:shadow-[0_0px_32px_0_rgba(99,60,255,0.25)] hover:border hover:border-violet lg:px-6'>
           <div className='flex flex-row items-center gap-3'>
             <Image src={selectedPlatform.image} alt='github-icon' width={16} height={16} />
             <span className='text-dark-gray'>{selectedPlatform.name}</span>
@@ -29,14 +29,18 @@ export default function PlatformSelect() {
             />
           )}
         </Listbox.Button>
-        <Listbox.Options className='absolute mt-4 bg-white rounded-lg border border-light-gray py-3 px-4 w-full shadow-[0_4px_32px_0_rgba(0,0,0,0.1)] flex flex-col gap-3'>
+        <Listbox.Options className='absolute mt-4 bg-white rounded-lg border border-light-gray py-2 px-4 w-full shadow-[0_4px_32px_0_rgba(0,0,0,0.1)] flex flex-col select-none'>
           {data
             .filter((social) => social !== selectedPlatform)
             .map((social) => (
               <Listbox.Option
                 key={social.name}
                 value={social}
-                className='flex flex-row items-center gap-3 border-b border-light-gray pb-3 lg:hover:cursor-pointer'>
+                className={({ active }) =>
+                  `flex flex-row items-center gap-3 border-b border-light-gray py-3 lg:px-2 ${
+                    active ? 'bg-violet/25 cursor-pointer' : ''
+                  }`
+                }>
                 <Image
                   src={social.image}
                   alt={`${social.name}-icon`}
@@ -44,7 +48,7 @@ export default function PlatformSelect() {
                   width={16}
                   height={16}
                 />
-                <span className='text-dark-gray lg:hover:text-violet'>{social.name}</span>
+                <span className='text-dark-gray'>{social.name}</span>
               </Listbox.Option>
             ))}
         </Listbox.Options>
