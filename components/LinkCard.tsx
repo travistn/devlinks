@@ -33,6 +33,7 @@ export default function LinkCard() {
             type='text'
             className='text-dark-gray outline-none w-full'
             value={selectedPlatform.link}
+            onChange={(e) => setSelectedPlatform({ ...selectedPlatform, link: e.target.value })}
           />
         </div>
       </div>
