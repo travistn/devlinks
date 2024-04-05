@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 import illustration_image from '../public/assets/illustration-empty.svg';
@@ -7,6 +7,19 @@ import LinkCard from './LinkCard';
 
 export default function GetStarted() {
   const [linkToggle, setLinkToggle] = useState(false);
+  const [links, setLinks] = useState();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('/api/user', {
+        method: 'GET',
+      });
+      const data = await response.json();
+
+      setLinks(data);
+    };
+    fetchUsers();
+  }, []);
 
   return (
     <section className='p-4 lg:grid grid-cols-7 gap-6'>
@@ -27,7 +40,7 @@ export default function GetStarted() {
           onClick={() => (!linkToggle ? setLinkToggle((prevState) => !prevState) : '')}>
           + Add new link
         </button>
-        {!linkToggle ? (
+        {/* {!linkToggle ? (
           <div className='bg-very-light-gray mt-6 px-5 py-11 flex flex-col items-center gap-6 rounded-xl'>
             <Image
               src={illustration_image}
@@ -44,11 +57,8 @@ export default function GetStarted() {
           </div>
         ) : (
           <LinkCard />
-        )}
-        <div className='border border-light-gray mt-6 -mx-6 md:-mx-10' />
-        <button className='mt-4 py-[11px] px-[27px] bg-violet/25 rounded-lg font-semibold text-white md:w-[91px] md:ml-auto lg:hover:bg-lavendar lg:hover:shadow-[0_4px_32px_0_rgba(99,60,250,0.25)]'>
-          Save
-        </button>
+          )} */}
+        <LinkCard />
       </div>
     </section>
   );
