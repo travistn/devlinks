@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+import LinkCard from './LinkCard';
+import { UserProps } from '@/types';
 import illustration_image from '../public/assets/illustration-empty.svg';
 import illustration_image_mockup from '../public/assets/illustration-phone-mockup.svg';
-import LinkCard from './LinkCard';
 
 export default function GetStarted() {
   const [linkToggle, setLinkToggle] = useState(false);
-  const [links, setLinks] = useState();
+  const [user, setUser] = useState<UserProps>();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -16,7 +17,7 @@ export default function GetStarted() {
       });
       const data = await response.json();
 
-      setLinks(data);
+      setUser(data[0]);
     };
     fetchUsers();
   }, []);
@@ -40,7 +41,7 @@ export default function GetStarted() {
           onClick={() => (!linkToggle ? setLinkToggle((prevState) => !prevState) : '')}>
           + Add new link
         </button>
-        {/* {!linkToggle ? (
+        {user?.links.length === 0 && !linkToggle && (
           <div className='bg-very-light-gray mt-6 px-5 py-11 flex flex-col items-center gap-6 rounded-xl'>
             <Image
               src={illustration_image}
@@ -55,10 +56,8 @@ export default function GetStarted() {
               can reorder and edit them. We’re here to help you share your profiles with everyone!
             </p>
           </div>
-        ) : (
-          <LinkCard />
-          )} */}
-        <LinkCard />
+        )}
+        {linkToggle && <LinkCard />}
       </div>
     </section>
   );
