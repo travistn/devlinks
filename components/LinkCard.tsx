@@ -37,6 +37,9 @@ export default function LinkCard() {
           />
         </div>
       </div>
+      <button className='mt-4 py-[11px] px-[27px] bg-violet/25 rounded-lg font-semibold text-white md:w-[91px] md:ml-auto lg:hover:bg-lavendar lg:hover:shadow-[0_4px_32px_0_rgba(99,60,250,0.25)]'>
+        Save
+      </button>
     </div>
   );
 }
