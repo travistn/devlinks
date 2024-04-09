@@ -57,7 +57,7 @@ export default function GetStarted() {
             </p>
           </div>
         )}
-        {linkToggle && <LinkCard />}
+        {linkToggle && <LinkCard user={user as UserProps} />}
       </div>
     </section>
   );
