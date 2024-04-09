@@ -5,9 +5,29 @@ import PlatformSelect from './PlatformSelect';
 import drag_and_drop_icon from '../public/assets/icon-drag-and-drop.svg';
 import link_icon from '../public/assets/icon-link.svg';
 import data from '../data.json';
+import { UserProps } from '@/types';
 
-export default function LinkCard() {
+type LinkCardProps = {
+  user: UserProps;
+};
+
+export default function LinkCard({ user }: LinkCardProps) {
   const [selectedPlatform, setSelectedPlatform] = useState(data[0]);
+
+  const createLink = async () => {
+    try {
+      await fetch('/api/link/new', {
+        method: 'POST',
+        body: JSON.stringify({
+          platform: selectedPlatform.name,
+          url: selectedPlatform.link,
+          user_id: user._id,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='flex flex-col gap-3 bg-very-light-gray rounded-xl p-5 mt-6'>
@@ -37,7 +57,10 @@ export default function LinkCard() {
           />
         </div>
       </div>
-      <button className='mt-4 py-[11px] px-[27px] bg-violet/25 rounded-lg font-semibold text-white md:w-[91px] md:ml-auto lg:hover:bg-lavendar lg:hover:shadow-[0_4px_32px_0_rgba(99,60,250,0.25)]'>
+      <button
+        className='mt-4 py-[11px] px-[27px] bg-violet/25 rounded-lg font-semibold text-white md:w-[91px] md:ml-auto lg:hover:bg-lavendar lg:hover:shadow-[0_4px_32px_0_rgba(99,60,250,0.25)]'
+        type='submit'
+        onClick={createLink}>
         Save
       </button>
     </div>
