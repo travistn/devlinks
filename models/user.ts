@@ -1,13 +1,15 @@
 import { Schema, model, models } from 'mongoose';
 
+import Link from './link';
+
 const UserSchema = new Schema({
   name: {
     type: String,
   },
   links: [
     {
-      platform: String,
-      url: String,
+      type: Schema.Types.ObjectId,
+      ref: Link,
     },
   ],
 });
