@@ -5,13 +5,15 @@ import PlatformSelect from './PlatformSelect';
 import drag_and_drop_icon from '../public/assets/icon-drag-and-drop.svg';
 import link_icon from '../public/assets/icon-link.svg';
 import data from '../data.json';
-import { UserProps } from '@/types';
+import { UserProps, LinkProps } from '@/types';
 
 type LinkCardProps = {
-  user: UserProps;
+  user?: UserProps;
+  link?: LinkProps;
+  newLinkCard: boolean;
 };
 
-export default function LinkCard({ user }: LinkCardProps) {
+export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
   const [selectedPlatform, setSelectedPlatform] = useState(data[0]);
 
   const createLink = async () => {
@@ -21,7 +23,7 @@ export default function LinkCard({ user }: LinkCardProps) {
         body: JSON.stringify({
           platform: selectedPlatform.name,
           url: selectedPlatform.link,
-          user_id: user._id,
+          user_id: user?._id,
         }),
       });
     } catch (error) {
@@ -52,7 +54,7 @@ export default function LinkCard({ user }: LinkCardProps) {
           <input
             type='text'
             className='text-dark-gray outline-none w-full'
-            value={selectedPlatform.link}
+            value={newLinkCard ? selectedPlatform.link : link?.url}
             onChange={(e) => setSelectedPlatform({ ...selectedPlatform, link: e.target.value })}
           />
         </div>

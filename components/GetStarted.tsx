@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
@@ -22,6 +24,8 @@ export default function GetStarted() {
     fetchUsers();
   }, []);
 
+  // console.log(user);
+
   return (
     <section className='p-4 lg:grid grid-cols-7 gap-6'>
       <div className='max-lg:hidden bg-white pt-[53.5px] pr-[24.5px] pb-[43.5px] pl-[23.5px] w-full flex items-center justify-center rounded-lg col-span-3'>
@@ -41,7 +45,7 @@ export default function GetStarted() {
           onClick={() => (!linkToggle ? setLinkToggle((prevState) => !prevState) : '')}>
           + Add new link
         </button>
-        {user?.links.length === 0 && !linkToggle && (
+        {user?.links.length === 0 && !linkToggle ? (
           <div className='bg-very-light-gray mt-6 px-5 py-11 flex flex-col items-center gap-6 rounded-xl'>
             <Image
               src={illustration_image}
@@ -56,8 +60,10 @@ export default function GetStarted() {
               can reorder and edit them. We’re here to help you share your profiles with everyone!
             </p>
           </div>
+        ) : (
+          user?.links.map((link) => <LinkCard link={link} key={link._id} newLinkCard={false} />)
         )}
-        {linkToggle && <LinkCard user={user as UserProps} />}
+        {linkToggle && <LinkCard user={user as UserProps} newLinkCard={true} />}
       </div>
     </section>
   );
