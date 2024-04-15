@@ -22,9 +22,7 @@ export default function GetStarted() {
       setUser(data[0]);
     };
     fetchUsers();
-  }, []);
-
-  // console.log(user);
+  }, [user?.links]);
 
   return (
     <section className='p-4 lg:grid grid-cols-7 gap-6'>
