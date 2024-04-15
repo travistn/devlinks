@@ -31,6 +31,19 @@ export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
     }
   };
 
+  const deleteLink = async () => {
+    try {
+      await fetch(`/api/link/${link?._id}`, {
+        method: 'DELETE',
+        body: JSON.stringify({
+          _id: link?._id,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='flex flex-col gap-3 bg-very-light-gray rounded-xl p-5 mt-6'>
       <div className='w-full flex flex-row justify-between items-center'>
@@ -38,7 +51,9 @@ export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
           <Image src={drag_and_drop_icon} alt='drag-and-drop-icon' />
           <h3 className='text-gray font-bold'>Link #1</h3>
         </div>
-        <p className='text-gray'>Remove</p>
+        <p className='text-gray lg:hover:cursor-pointer lg:hover:underline' onClick={deleteLink}>
+          Remove
+        </p>
       </div>
       <div className='flex flex-col gap-1'>
         <h4 className='text-[12px] text-dark-gray'>Platform</h4>
