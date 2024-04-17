@@ -11,9 +11,10 @@ type LinkCardProps = {
   user?: UserProps;
   link?: LinkProps;
   newLinkCard: boolean;
+  setLinkToggle?: (linkToggle: boolean) => void;
 };
 
-export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
+export default function LinkCard({ user, link, newLinkCard, setLinkToggle }: LinkCardProps) {
   const [selectedPlatform, setSelectedPlatform] = useState(data[0]);
 
   const createLink = async () => {
@@ -42,6 +43,11 @@ export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleSaveClick = () => {
+    createLink();
+    setLinkToggle?.(false);
   };
 
   return (
@@ -77,7 +83,7 @@ export default function LinkCard({ user, link, newLinkCard }: LinkCardProps) {
       <button
         className='mt-4 py-[11px] px-[27px] bg-violet/25 rounded-lg font-semibold text-white md:w-[91px] md:ml-auto lg:hover:bg-lavendar lg:hover:shadow-[0_4px_32px_0_rgba(99,60,250,0.25)]'
         type='submit'
-        onClick={createLink}>
+        onClick={() => (newLinkCard ? handleSaveClick() : '')}>
         Save
       </button>
     </div>

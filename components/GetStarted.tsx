@@ -40,7 +40,7 @@ export default function GetStarted() {
         </div>
         <button
           className='rounded-lg py-[11px] px-[27px] border border-violet text-violet font-semibold mt-10 hover:bg-light-lavender'
-          onClick={() => (!linkToggle ? setLinkToggle((prevState) => !prevState) : '')}>
+          onClick={() => setLinkToggle((prevState) => !prevState)}>
           + Add new link
         </button>
         {user?.links.length === 0 && !linkToggle ? (
@@ -61,7 +61,10 @@ export default function GetStarted() {
         ) : (
           user?.links.map((link) => <LinkCard link={link} key={link._id} newLinkCard={false} />)
         )}
-        {linkToggle && <LinkCard user={user as UserProps} newLinkCard={true} />}
+
+        {linkToggle && (
+          <LinkCard user={user as UserProps} newLinkCard={true} setLinkToggle={setLinkToggle} />
+        )}
       </div>
     </section>
   );
